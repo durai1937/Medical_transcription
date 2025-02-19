@@ -26,20 +26,6 @@ def clean_text(text):
 # Apply text cleaning
 df['cleaned_symptoms'] = df['Symptoms'].apply(clean_text)
 
-# Vectorize text
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(df['cleaned_symptoms'].apply(lambda x: ' '.join(x)))
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, df['Disease'], test_size=0.2, random_state=42)
-
-# Train model
-model = LogisticRegression()
-model.fit(X_train, y_train)
-
-# Predict on test data
-y_pred = model.predict(X_test)
-
 # Streamlit app
 def main():
     st.title("Voice Based Medical Transcription")
